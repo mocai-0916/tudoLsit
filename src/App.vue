@@ -71,6 +71,7 @@ export default {
     this.pubRemoveID = pubsub.subscribe('removeID', this.removeID);
     this.pubDataID = pubsub.subscribe('receiveData', this.receiveData);
     this.$bus.$on('updataTudo', this.updataTudo);
+    console.log(this.$bus);
   },
   beforeDestroy() {
     //解绑pubsub
