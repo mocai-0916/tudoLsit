@@ -2,6 +2,7 @@
 
 ```
   tudoLst案例
+  删除了log版本 i
 ```
 
 ## Project setup
