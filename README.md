@@ -5,6 +5,7 @@
 ```
 npm install
 现在是hot-fix分支
+网页修改hot-fix分支
 ```
 
 ### Compiles and hot-reloads for development
