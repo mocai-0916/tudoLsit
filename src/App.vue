@@ -31,6 +31,7 @@ export default {
     },
     removeID(_, value) {
       //返回一个新数组 记得赋值再返回
+      console.log(this);
       this.tudos = this.tudos.filter(todo => {
         return todo.id !== value;
       });
