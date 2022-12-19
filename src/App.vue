@@ -5,21 +5,17 @@
         <!-- 把一个方法传给儿子inputbox -->
         <input-box></input-box>
         <my-list :tudos="tudos"></my-list>
-        <my-footer
-          :tudos="tudos"
-          @clearAllTudo="clearAllTudo"
-          @chackAll="chackAll"
-        ></my-footer>
+        <my-footer :tudos="tudos" @clearAllTudo="clearAllTudo" @chackAll="chackAll"></my-footer>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import inputBox from "./components/inputBox.vue";
-import MyFooter from "./components/MyFooter.vue";
-import MyList from "./components/MyList.vue";
-import pubsub from "pubsub-js";
+import inputBox from './components/inputBox.vue';
+import MyFooter from './components/MyFooter.vue';
+import MyList from './components/MyList.vue';
+import pubsub from 'pubsub-js';
 export default {
   components: { inputBox, MyList, MyFooter },
   methods: {
@@ -27,7 +23,7 @@ export default {
       this.tudos.unshift(tudoObj); //拿到input传来的数据直接unshift添加进数组里
     },
     chackID(id) {
-      this.tudos.forEach((td) => {
+      this.tudos.forEach(td => {
         if (td.id === id) {
           td.done = !td.done;
         }
@@ -35,26 +31,27 @@ export default {
     },
     removeID(_, value) {
       //返回一个新数组 记得赋值再返回
-      this.tudos = this.tudos.filter((todo) => {
+      console.log(123);
+      this.tudos = this.tudos.filter(todo => {
         return todo.id !== value;
       });
     },
     chackAll(value) {
-      this.tudos.forEach((tudo) => {
+      this.tudos.forEach(tudo => {
         tudo.done = value;
       });
     },
     clearAllTudo() {
-      this.tudos = this.tudos.filter((tudo) => {
+      this.tudos = this.tudos.filter(tudo => {
         return !tudo.done;
       });
     },
-    updataTudo(id,title){
-        this.tudos.forEach((t) => {
-            if (t.id === id) {
-                t.title = title
-            }
-        })
+    updataTudo(id, title) {
+      this.tudos.forEach(t => {
+        if (t.id === id) {
+          t.title = title;
+        }
+      });
     }
   },
   watch: {
@@ -62,30 +59,30 @@ export default {
     tudos: {
       deep: true,
       handler(newValue) {
-        sessionStorage.setItem("tudos", JSON.stringify(newValue));
-      },
-    },
+        sessionStorage.setItem('tudos', JSON.stringify(newValue));
+      }
+    }
   },
   data() {
     return {
-      tudos: JSON.parse(sessionStorage.getItem("tudos")) || [],
+      tudos: JSON.parse(sessionStorage.getItem('tudos')) || []
     };
   },
   mounted() {
-    this.$bus.$on("chackID", this.chackID);
+    this.$bus.$on('chackID', this.chackID);
     // this.$bus.$on('removeID',this.removeID);
-    this.pubRemoveID = pubsub.subscribe("removeID", this.removeID);
-    this.pubDataID = pubsub.subscribe("receiveData", this.receiveData);
-    this.$bus.$on('updataTudo',this.updataTudo)
+    this.pubRemoveID = pubsub.subscribe('removeID', this.removeID);
+    this.pubDataID = pubsub.subscribe('receiveData', this.receiveData);
+    this.$bus.$on('updataTudo', this.updataTudo);
   },
   beforeDestroy() {
     //解绑pubsub
     pubsub.unsubscribe(this.pubRemoveID);
     pubsub.unsubscribe(this.pubDataID);
     //解绑事件总线
-    this.$bus.$off('chackID')
-    this.$bus.$off('updataTudo')
-  },
+    this.$bus.$off('chackID');
+    this.$bus.$off('updataTudo');
+  }
 };
 </script>
 
@@ -102,8 +99,7 @@ body {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 4px;
 }
 .btn-danger {
@@ -116,7 +112,7 @@ body {
   background-color: #1456e6;
   border: 1px solid #207bc0;
 }
-.btn-edit-confirm{
+.btn-edit-confirm {
   color: #fff;
   background-color: #000000;
   border: 1px solid #000000;
