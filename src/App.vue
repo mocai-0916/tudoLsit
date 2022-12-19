@@ -31,7 +31,6 @@ export default {
     },
     removeID(_, value) {
       //返回一个新数组 记得赋值再返回
-      console.log(123);
       this.tudos = this.tudos.filter(todo => {
         return todo.id !== value;
       });
@@ -42,9 +41,7 @@ export default {
       });
     },
     clearAllTudo() {
-      this.tudos = this.tudos.filter(tudo => {
-        return !tudo.done;
-      });
+      this.tudos = this.tudos.filter(tudo => !tudo.done);
     },
     updataTudo(id, title) {
       this.tudos.forEach(t => {
