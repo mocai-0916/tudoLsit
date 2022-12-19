@@ -4,6 +4,7 @@
   tudoLst案例
   删除了log版本 i
   主分支修订1
+  删除了log版本
 ```
 
 ## Project setup
